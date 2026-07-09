@@ -25,7 +25,7 @@ When('clicar no botão "Login"', () => {
 
 Then('o sistema retorna o aviso "Epic sadface: Username and password do not match any user in this service"', () => {
    cy.esperaReloadPagina(30000)
-   cy.contains('Epic sadface: Username and password do not match any user in this service').should('be.visible')
+   cy.VerificaTxtVisivel('Epic sadface: Username and password do not match any user in this service')
 })
 
 When('tenta logar-se com usuário bloqueado', () => {
@@ -41,5 +41,5 @@ When('tenta logar-se com usuário bloqueado', () => {
 
 Then('o sistema retorna o aviso "Epic sadface: Sorry, this user has been locked out."', () => {
    cy.esperaReloadPagina(30000)
-   cy.contains('Epic sadface: Sorry, this user has been locked out.').should('be.visible')
+   cy.VerificaTxtVisivel('Epic sadface: Sorry, this user has been locked out.')
 })

@@ -24,3 +24,7 @@ Cypress.Commands.add('ExtrairValorJSON', (json, chave) => {
     return dados[chave];
   });
 });
+
+Cypress.Commands.add('VerificaTxtVisivel', (texto) => {
+  return cy.contains(texto).should('be.visible')
+});
