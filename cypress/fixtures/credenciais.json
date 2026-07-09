@@ -1,0 +1,26 @@
+{
+  "standard_user": {
+    "login": "standard_user",
+    "senha": "secret_sauce"
+  },
+  "locked_out_user": {
+    "login": "locked_out_user",
+    "senha": "secret_sauce"
+  },
+  "problem_user": {
+    "login": "problem_user",
+    "senha": "secret_sauce"
+  },
+  "performance_glitch_user": {
+    "login": "performance_glitch_user",
+    "senha": "secret_sauce"
+  },
+  "error_user": {
+    "login": "error_user",
+    "senha": "secret_sauce"
+  },
+  "visual_user": {
+    "login": "visual_user",
+    "senha": "secret_sauce"
+  }
+}

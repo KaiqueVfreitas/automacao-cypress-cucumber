@@ -39,7 +39,7 @@ When('tenta logar-se com usuário bloqueado', () => {
    cy.clicarBotao(LOGIN_ELEMENTS.btnLogin)
 })
 
-Then('o sistema retorna o aviso "Epic sadface: Sorry, this user has been locked out."', () => {
+Then('deve visualizar a mensagem "Epic sadface: Sorry, this user has been locked out."', () => {
    cy.esperaReloadPagina(30000)
    cy.VerificaTxtVisivel('Epic sadface: Sorry, this user has been locked out.')
 })
