@@ -43,3 +43,4 @@ Then('deve visualizar a mensagem "Epic sadface: Sorry, this user has been locked
    cy.esperaReloadPagina(30000)
    cy.VerificaTxtVisivel('Epic sadface: Sorry, this user has been locked out.')
 })
+

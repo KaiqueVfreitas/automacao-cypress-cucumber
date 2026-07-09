@@ -10,3 +10,7 @@ Feature: Processo de criação e validação de credenciais no ecommerce
       Given que o usuário está na tela de login
       When tenta logar-se com usuário bloqueado
       Then deve visualizar a mensagem "Epic sadface: Sorry, this user has been locked out."
+
+   Scenario: Acesso com diferentes usuários válidos
+    Given que o ecommerce possui múltiplos usuários cadastrados
+    Then o sistema autentica corretamente e concede acesso à conta correspondente quando o usuário faz login
