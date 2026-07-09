@@ -1,25 +1,20 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('acessarURL', (url, componente) => {
+   return cy.then(() => {
+      cy.visit(url)
+
+      //Componente que deve estar visivel na página para confirmar o carregamento da págia
+      return cy.get(componente).should('exist').and('be.visible')
+   }) 
+});
+
+Cypress.Commands.add('preencheCampo', (campo, valor) => {
+   return cy.get(campo).should('be.visible').and('be.enabled').clear().type(valor)
+})
+
+Cypress.Commands.add('clicarBotao', (campo) => {
+   return cy.get(campo).should('be.visible').click()
+})
+
+Cypress.Commands.add('esperaReloadPagina', (tempo) => {
+   return cy.document({ timeout: tempo }).its('readyState').should('eq', 'complete')
+})
