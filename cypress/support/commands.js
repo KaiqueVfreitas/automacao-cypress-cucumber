@@ -18,3 +18,9 @@ Cypress.Commands.add('clicarBotao', (campo) => {
 Cypress.Commands.add('esperaReloadPagina', (tempo) => {
    return cy.document({ timeout: tempo }).its('readyState').should('eq', 'complete')
 })
+
+Cypress.Commands.add('ExtrairValorJSON', (json, chave) => {
+  return cy.fixture(json).then((dados) => {
+    return dados[chave];
+  });
+});

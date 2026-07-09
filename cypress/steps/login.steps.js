@@ -28,3 +28,18 @@ Then('o sistema retorna o aviso "Epic sadface: Username and password do not matc
    cy.contains('Epic sadface: Username and password do not match any user in this service').should('be.visible')
 })
 
+When('tenta logar-se com usuário bloqueado', () => {
+
+
+  cy.ExtrairValorJSON('credenciais', 'locked_out_user').then((usuario) => {
+    cy.preencheCampo(LOGIN_ELEMENTS.inpUsername,usuario.login); // locked_out_user
+    cy.preencheCampo(LOGIN_ELEMENTS.inpPassword,usuario.senha); // secret_sauce
+});
+
+   cy.clicarBotao(LOGIN_ELEMENTS.btnLogin)
+})
+
+Then('o sistema retorna o aviso "Epic sadface: Sorry, this user has been locked out."', () => {
+   cy.esperaReloadPagina(30000)
+   cy.contains('Epic sadface: Sorry, this user has been locked out.').should('be.visible')
+})
