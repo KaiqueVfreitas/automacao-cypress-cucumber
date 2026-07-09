@@ -11,13 +11,15 @@ Cypress.Commands.add('preencheCampo', (campo, valor) => {
    return cy.get(campo).should('be.visible').and('be.enabled').clear().type(valor)
 })
 
-Cypress.Commands.add('clicarBotao', (campo) => {
+Cypress.Commands.add('clicarDOM', (campo) => {
    return cy.get(campo).should('be.visible').click()
 })
 
-Cypress.Commands.add('esperaReloadPagina', (tempo) => {
-   return cy.document({ timeout: tempo }).its('readyState').should('eq', 'complete')
+Cypress.Commands.add('clicarTxt', (campo) => {
+   return cy.contains(campo).should('be.visible').click()
 })
+
+
 
 Cypress.Commands.add('ExtrairValorJSON', (json, chave) => {
   return cy.fixture(json).then((dados) => {
@@ -28,3 +30,13 @@ Cypress.Commands.add('ExtrairValorJSON', (json, chave) => {
 Cypress.Commands.add('VerificaTxtVisivel', (texto) => {
   return cy.contains(texto).should('be.visible')
 });
+
+Cypress.Commands.add('esperaReloadPagina', (tempo) => {
+   return cy.document({ timeout: tempo }).its('readyState').should('eq', 'complete')
+})
+
+Cypress.Commands.add('aguardarTxtVisivel', (txt, tempo) => {
+   return cy.contains(txt, {
+      timeout: tempo
+   }).should('be.visible')
+})
