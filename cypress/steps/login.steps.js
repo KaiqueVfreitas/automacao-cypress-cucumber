@@ -4,7 +4,8 @@ import { ALL_ITENS_ELEMENTS} from '../elements/all-itens.elements';
 import { faker } from '@faker-js/faker';
 
 Given('que o usuário está na tela de login', () => {
-   cy.acessarURL(LOGIN_ELEMENTS.URL_LOGIN, LOGIN_ELEMENTS.inpUsername)
+   cy.log(Cypress.env("baseUrl"))
+   cy.acessarURL(Cypress.env("baseUrl"), LOGIN_ELEMENTS.inpUsername)
 });
 
 Given('preenche os campos de email e senha que não estão cadastrados no ecommerce', () => {
@@ -30,12 +31,10 @@ Then('o sistema retorna o aviso "Epic sadface: Username and password do not matc
 })
 
 When('tenta logar-se com usuário bloqueado', () => {
-
-
-  cy.ExtrairValorJSON('credenciais', 'locked_out_user').then((usuario) => {
-    cy.preencheCampo(LOGIN_ELEMENTS.inpUsername,usuario.login); // locked_out_user
-    cy.preencheCampo(LOGIN_ELEMENTS.inpPassword,usuario.senha); // secret_sauce
-});
+   cy.ExtrairValorJSON('credenciais', 'locked_out_user').then((usuario) => {
+      cy.preencheCampo(LOGIN_ELEMENTS.inpUsername,usuario.login);
+      cy.preencheCampo(LOGIN_ELEMENTS.inpPassword,usuario.senha);
+   });
 
    cy.clicarDOM(LOGIN_ELEMENTS.btnLogin)
 })
@@ -67,19 +66,13 @@ Then('o sistema autentica corretamente e concede acesso à conta correspondente 
 
    cy.get('@usuariosCadastrados').each((user) => {
       return cy.ExtrairValorJSON('credenciais', user).then((usuario) => {
-         cy.preencheCampo(LOGIN_ELEMENTS.inpUsername, usuario.login);
-         cy.preencheCampo(LOGIN_ELEMENTS.inpPassword, usuario.senha);
-         const inicio = performance.now()
-
-cy.clicarDOM(LOGIN_ELEMENTS.btnLogin)
-
-cy.contains('Products').then(() => {
-
-    const tempo = performance.now() - inicio
-
-    expect(tempo).to.be.lessThan(1000)
-
-})
+         cy.login(usuario.login, usuario.senha)
+         
+         cy.contains('Products').then(() => {
+            const inicio = performance.now()
+            const tempo = performance.now() - inicio
+            expect(tempo).to.be.lessThan(1000)
+         })
 
          return cy.aguardarTxtVisivel(txtConfirmacaoLogin, tmpLimite).then(() => {
             cy.clicarDOM(ALL_ITENS_ELEMENTS.btnNavegacao)

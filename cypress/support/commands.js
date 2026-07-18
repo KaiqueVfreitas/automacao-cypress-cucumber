@@ -1,3 +1,5 @@
+import { LOGIN_ELEMENTS} from '../elements/login.elements';
+
 Cypress.Commands.add('acessarURL', (url, componente) => {
    return cy.then(() => {
       cy.visit(url)
@@ -6,6 +8,16 @@ Cypress.Commands.add('acessarURL', (url, componente) => {
       return cy.get(componente).should('exist').and('be.visible')
    }) 
 });
+
+Cypress.Commands.add('login', (user, pass) => {
+   return cy.visit(Cypress.env("baseUrl")).then(() => {
+      cy.preencheCampo(LOGIN_ELEMENTS.inpUsername, user);
+      cy.preencheCampo(LOGIN_ELEMENTS.inpPassword, pass);
+      cy.clicarDOM(LOGIN_ELEMENTS.btnLogin)
+
+      return cy.aguardarTxtVisivel('Products')
+   });
+})
 
 Cypress.Commands.add('preencheCampo', (campo, valor) => {
    return cy.get(campo).should('be.visible').and('be.enabled').clear().type(valor)

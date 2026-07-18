@@ -16,11 +16,6 @@ cypress/downloads/
 .DS_Store
 Thumbs.db
 
-# Ambiente
-.env
-.env.local
-.env.*.local
-
 # Build/coverage (se usar)
 dist/
 build/

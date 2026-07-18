@@ -1,4 +1,4 @@
-Feature: Processo de criação e validação de credenciais no ecommerce
+Feature: Login no ecommerce com diferentes usuários
 
    Scenario: Login com usuário não cadastrado
       Given que o usuário está na tela de login
